@@ -6,12 +6,15 @@ const Cart = createContext();
 
 function Context({ children }) {
 
+    faker.seed(99);
+
     const products = [...Array(20)].map(() => ({
         id: faker.string.uuid(),
         name: faker.commerce.productName(),
         price: faker.commerce.price(),
         image: faker.image.urlLoremFlickr({ category: 'commerce' }),
         fastDelivery: faker.datatype.boolean(),
+        inStock: faker.datatype.boolean(),
     }))
 
     // console.log(products)
@@ -21,10 +24,11 @@ function Context({ children }) {
         cart: [],
     })
 
-    return <Cart.Provider value={{state, dispatch}}>
+    return <Cart.Provider value={{ state, dispatch }}>
         {children}
     </Cart.Provider>
 }
+
 
 export default Context;
 
